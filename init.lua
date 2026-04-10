@@ -430,13 +430,14 @@ vim.pack.add({
   -- Language Server Protocols
   "https://www.github.com/neovim/nvim-lspconfig",
   "https://github.com/mason-org/mason.nvim",
+  "https://github.com/zapling/mason-lock.nvim",
   "https://github.com/creativenull/efmls-configs-nvim",
   {
     src = "https://github.com/saghen/blink.cmp",
     version = vim.version.range("1.*"),
   },
   "https://github.com/L3MON4D3/LuaSnip",
-  "https://github.com/rebelot/kanagawa.nvim"
+  "https://github.com/rebelot/kanagawa.nvim",
 })
 
 local function packadd(name)
@@ -450,6 +451,7 @@ packadd("nvim-tree.lua")
 -- LSP
 packadd("nvim-lspconfig")
 packadd("mason.nvim")
+packadd("mason-lock.nvim")
 packadd("efmls-configs-nvim")
 packadd("blink.cmp")
 packadd("LuaSnip")
@@ -580,6 +582,7 @@ require("gitsigns").setup({
 })
 
 require("mason").setup({})
+require("mason-lock").setup({})
 
 vim.keymap.set("n", "]h", function()
 	require("gitsigns").next_hunk()
