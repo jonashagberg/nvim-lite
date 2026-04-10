@@ -1,8 +1,7 @@
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("habamax")
 
 local function set_transparent() -- set UI component to transparent
-	local groups = {
+  local groups = {
 		"Normal",
 		"NormalNC",
 		"EndOfBuffer",
@@ -419,24 +418,25 @@ vim.api.nvim_create_autocmd("FileType", {
 -- PLUGINS (vim.pack)
 -- ============================================================================
 vim.pack.add({
-	"https://www.github.com/lewis6991/gitsigns.nvim",
-	"https://www.github.com/echasnovski/mini.nvim",
-	"https://www.github.com/ibhagwan/fzf-lua",
-	"https://www.github.com/nvim-tree/nvim-tree.lua",
-	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		branch = "main",
-		build = ":TSUpdate",
-	},
-	-- Language Server Protocols
-	"https://www.github.com/neovim/nvim-lspconfig",
-	"https://github.com/mason-org/mason.nvim",
-	"https://github.com/creativenull/efmls-configs-nvim",
-	{
-		src = "https://github.com/saghen/blink.cmp",
-		version = vim.version.range("1.*"),
-	},
-	"https://github.com/L3MON4D3/LuaSnip",
+  "https://www.github.com/lewis6991/gitsigns.nvim",
+  "https://www.github.com/echasnovski/mini.nvim",
+  "https://www.github.com/ibhagwan/fzf-lua",
+  "https://www.github.com/nvim-tree/nvim-tree.lua",
+  {
+    src = "https://github.com/nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    build = ":TSUpdate",
+  },
+  -- Language Server Protocols
+  "https://www.github.com/neovim/nvim-lspconfig",
+  "https://github.com/mason-org/mason.nvim",
+  "https://github.com/creativenull/efmls-configs-nvim",
+  {
+    src = "https://github.com/saghen/blink.cmp",
+    version = vim.version.range("1.*"),
+  },
+  "https://github.com/L3MON4D3/LuaSnip",
+  "https://github.com/rebelot/kanagawa.nvim"
 })
 
 local function packadd(name)
@@ -453,6 +453,9 @@ packadd("mason.nvim")
 packadd("efmls-configs-nvim")
 packadd("blink.cmp")
 packadd("LuaSnip")
+packadd("kanagawa.nvim")
+
+vim.cmd.colorscheme("kanagawa")
 
 -- ============================================================================
 -- PLUGIN CONFIGS
@@ -533,22 +536,22 @@ vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = "none" })
 
 require("fzf-lua").setup({})
 
-vim.keymap.set("n", "<leader>ff", function()
+vim.keymap.set("n", "<leader>sf", function()
 	require("fzf-lua").files()
 end, { desc = "FZF Files" })
-vim.keymap.set("n", "<leader>fg", function()
+vim.keymap.set("n", "<leader>sg", function()
 	require("fzf-lua").live_grep()
 end, { desc = "FZF Live Grep" })
-vim.keymap.set("n", "<leader>fb", function()
+vim.keymap.set("n", "<leader>sb", function()
 	require("fzf-lua").buffers()
 end, { desc = "FZF Buffers" })
-vim.keymap.set("n", "<leader>fh", function()
+vim.keymap.set("n", "<leader>sh", function()
 	require("fzf-lua").help_tags()
 end, { desc = "FZF Help Tags" })
-vim.keymap.set("n", "<leader>fx", function()
+vim.keymap.set("n", "<leader>sx", function()
 	require("fzf-lua").diagnostics_document()
 end, { desc = "FZF Diagnostics Document" })
-vim.keymap.set("n", "<leader>fX", function()
+vim.keymap.set("n", "<leader>sX", function()
 	require("fzf-lua").diagnostics_workspace()
 end, { desc = "FZF Diagnostics Workspace" })
 
@@ -557,7 +560,6 @@ require("mini.comment").setup({})
 require("mini.move").setup({})
 require("mini.surround").setup({})
 require("mini.cursorword").setup({})
-require("mini.indentscope").setup({})
 require("mini.pairs").setup({})
 require("mini.trailspace").setup({})
 require("mini.bufremove").setup({})
@@ -675,11 +677,11 @@ local function lsp_on_attach(ev)
 	vim.keymap.set("n", "<leader>d", function()
 		vim.diagnostic.open_float({ scope = "cursor" })
 	end, opts)
-	vim.keymap.set("n", "<leader>nd", function()
+	vim.keymap.set("n", "<leader>dn", function()
 		vim.diagnostic.jump({ count = 1 })
 	end, opts)
 
-	vim.keymap.set("n", "<leader>pd", function()
+	vim.keymap.set("n", "<leader>dp", function()
 		vim.diagnostic.jump({ count = -1 })
 	end, opts)
 
@@ -729,9 +731,9 @@ require("blink.cmp").setup({
 	keymap = {
 		preset = "none",
 		["<C-Space>"] = { "show", "hide" },
-		["<CR>"] = { "accept", "fallback" },
-		["<C-j>"] = { "select_next", "fallback" },
-		["<C-k>"] = { "select_prev", "fallback" },
+		["<C-y>"] = { "accept", "fallback" },
+		["<C-n>"] = { "select_next", "fallback" },
+		["<C-p>"] = { "select_prev", "fallback" },
 		["<Tab>"] = { "snippet_forward", "fallback" },
 		["<S-Tab>"] = { "snippet_backward", "fallback" },
 	},
